@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/postersignup">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30sp"
+                android:layout_marginBottom="40sp"
+                android:fontFamily="@font/nunito_sans_extrabold"
+                android:text="Đăng ký"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="45sp" />
+
+            <LinearLayout
+                android:padding="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans_extrabold"
+                    android:text="Tên đăng nhập"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/txtusername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans_extrabold"
+                    android:text="Email"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/txtemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans_extrabold"
+                    android:text="Mật khẩu"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/txtpass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nhập lại mật khẩu"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/txtpassRepeat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btndangki"
+                android:layout_width="match_parent"
+                android:layout_height="70sp"
+                android:text="Đăng kí"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginTop="10sp"
+                android:backgroundTint="@color/red"/>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_marginTop="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="10sp"
+                    android:layout_height="wrap_content"
+                    android:text="Nếu đã có tài khoản hãy"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/txtdangki"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đăng nhập"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

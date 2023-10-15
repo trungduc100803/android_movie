@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/detail_movie"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_marginBottom="120sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:padding="20sp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/title_detail"
+                android:textColor="@color/red"
+                android:textSize="26sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="detail"/>
+
+            <ImageView
+                android:id="@+id/img_detail"
+                android:layout_marginTop="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                app:layout_constraintTop_toBottomOf="@+id/title_detail"
+                tools:layout_editor_absoluteX="20dp" />
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="des"
+                android:gravity="fill"
+                android:lineHeight="20sp"
+                android:layout_marginTop="20sp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/img_detail"
+                tools:layout_editor_absoluteX="20dp" />
+
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đạo diễn"
+                android:layout_marginTop="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/desc"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thời gian"
+                android:layout_marginTop="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/author"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <LinearLayout
+                android:layout_marginTop="30sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Button
+                    android:textColor="@color/white"
+                    android:id="@+id/btnluuyeuthic"
+                    android:backgroundTint="@color/red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50sp"
+                    android:text="Lưu vào yêu thich"/>
+
+                <Button
+                    android:textColor="@color/black"
+                    android:id="@+id/btnboluuyeuthic"
+                    android:backgroundTint="@color/gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50sp"
+                    android:text="Hủy yêu thich"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:padding="20sp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <Button
+            android:id="@+id/btnplay"
+            android:layout_width="match_parent"
+            android:layout_height="70sp"
+            android:backgroundTint="@color/red"
+            android:text="Xem phim"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_marginBottom="100sp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:background="@drawable/user"
+                    android:scaleType="centerCrop"
+                    android:layout_width="100sp"
+                    android:layout_height="100sp"
+                    android:src="@drawable/user"/>
+
+                <TextView
+                    android:id="@+id/nameavatar"
+                    android:layout_marginLeft="20sp"
+                    android:textSize="30sp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="trung duc"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:text="Tên:"/>
+
+                <TextView
+                    android:id="@+id/nameuser"
+                    android:layout_marginLeft="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:text="Trungduc"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginBottom="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:text="Email:"/>
+
+                <TextView
+                    android:id="@+id/emailuser"
+                    android:layout_marginLeft="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:text="Trungduc"/>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btndangxuat"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="70sp"
+                android:text="Đăng xuất"
+                android:textSize="20sp"
+                android:layout_marginTop="300sp"
+                android:backgroundTint="@color/red"/>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20sp"
+    android:background="@drawable/bg">
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_marginBottom="120sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <WebView
+                android:id="@+id/video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="20dp">
+
+                <LinearLayout
+                    android:layout_marginTop="20sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Server 1"
+                        android:backgroundTint="@color/black"
+                        android:textColor="@color/white"
+                        android:layout_marginRight="12sp"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Server 2"
+                        android:backgroundTint="@color/black"
+                        android:textColor="@color/white"
+                        android:layout_marginRight="12sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/descM"
+                    android:gravity="fill"
+                    android:lineHeight="20sp"
+                    android:layout_marginTop="20sp"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30sp"
+                    android:fontFamily="@font/nunito_sans_extrabold"
+                    android:text="Gợi ý"
+                    android:textColor="@color/red"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewFlipper" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcy_Movie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="20px"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    tools:layout_editor_absoluteX="20dp" />
+
+                <LinearLayout
+                    android:layout_marginTop="70sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="start">
+                    <TextView
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_marginRight="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đánh giá: "/>
+                    <TextView
+                        android:layout_marginRight="3sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/star"/>
+                    <TextView
+                        android:layout_marginRight="3sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/star"/>
+                    <TextView
+                        android:layout_marginRight="3sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/star"/>
+                    <TextView
+                        android:layout_marginRight="3sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/star"/>
+                    <TextView
+                        android:layout_marginRight="3sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/star"/>
+                </LinearLayout>
+
+
+                <EditText
+                    android:layout_marginTop="30sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="70sp"
+                    android:hint="Bình luận..."
+                    android:textColorHint="@color/white"
+                    android:backgroundTint="@color/white"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
