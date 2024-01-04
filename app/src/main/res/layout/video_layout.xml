@@ -87,48 +87,76 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="start">
-                    <TextView
+                    <Button
                         android:textColor="@color/white"
+                        android:id="@+id/btnte"
+                        android:text="Tệ 😢"
                         android:textSize="20sp"
-                        android:layout_marginRight="12sp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/gray"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Đánh giá: "/>
-                    <TextView
-                        android:layout_marginRight="3sp"
+                        android:layout_height="wrap_content"/>
+
+                    <Button
+                        android:textColor="@color/white"
+                        android:id="@+id/btntb"
+                        android:text="Trung bình 😃"
+                        android:textSize="20sp"
+                        android:backgroundTint="@color/gray"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/star"/>
-                    <TextView
-                        android:layout_marginRight="3sp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="start">
+                    <Button
+                        android:textColor="@color/white"
+                        android:id="@+id/btntot"
+                        android:text="Tốt 😘"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/gray"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/star"/>
-                    <TextView
-                        android:layout_marginRight="3sp"
+                        android:layout_height="wrap_content"/>
+
+                    <Button
+                        android:textColor="@color/white"
+                        android:id="@+id/btntv"
+                        android:text="Tuyệt vời ❤"
+                        android:textSize="20sp"
+                        android:backgroundTint="@color/gray"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/star"/>
-                    <TextView
-                        android:layout_marginRight="3sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/star"/>
-                    <TextView
-                        android:layout_marginRight="3sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/star"/>
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
 
 
-                <EditText
-                    android:layout_marginTop="30sp"
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="70sp"
-                    android:hint="Bình luận..."
-                    android:textColorHint="@color/white"
-                    android:backgroundTint="@color/white"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/txtBinhluan"
+                        android:layout_marginTop="30sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="70sp"
+                        android:hint="Bình luận..."
+                        android:drawableRight="@drawable/baseline_send_24"
+                        android:textColorHint="@color/white"
+                        android:backgroundTint="@color/white"/>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcy_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    tools:layout_editor_absoluteX="20dp" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

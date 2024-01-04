@@ -40,17 +40,24 @@ public class DetailMovieActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detai_movie_layout);
-        List<User> listUser = new ArrayList<>();
+        List<Favorite> favoriteList = new ArrayList<>();
+
+        Global global = Global.getInstance();
+        String userN = global.getUserName();
         Bundle bundle = getIntent().getExtras();
         int i = 0;
         init();
+
+        getFavoriteFromDatabase(favoriteList);
+        CardMovie cardMovie = getCardMovie(bundle, i);
 
         btnBoyeuthic.setVisibility(View.INVISIBLE);
 
         btnLuuYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handleYeuThich(i, listUser);
+                assert bundle != null;
+                handleYeuThich(cardMovie, favoriteList);
             }
         });
 
@@ -61,14 +68,13 @@ public class DetailMovieActivity extends AppCompatActivity {
             }
         });
 
-        CardMovie cardMovie = getCardMovie(bundle, i);
         assert cardMovie != null;
         displayMovie(cardMovie);
 
         btnXem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handleBtnPlay(cardMovie.getUrlVideo(), cardMovie.getDescriptions());
+                handleBtnPlay(cardMovie.getUrlVideo(), cardMovie.getDescriptions(), cardMovie.getTitle());
             }
         });
     }
@@ -84,18 +90,26 @@ public class DetailMovieActivity extends AppCompatActivity {
         btnLuuYeuThich = findViewById(R.id.btnluuyeuthic);
         btnBoyeuthic = findViewById(R.id.btnboluuyeuthic);
     }
-    private void handleYeuThich(int userID, List<User> listUser){
+    private void handleYeuThich(CardMovie cardMovie, List<Favorite> favoriteList){
         btnLuuYeuThich.setVisibility(View.GONE);
         btnBoyeuthic.setVisibility(View.VISIBLE);
-        List<Favorite> list =  new ArrayList<>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseRef = database.getReference("users/" + userID);
 
-        databaseRef.addValueEventListener(new ValueEventListener() {
+        Global global = Global.getInstance();
+        String userN = global.getUserName();
+        addFavorite(userN, cardMovie, favoriteList);
+    }
+
+    private List<Favorite> handleVisibleBtnFavorite(List<Favorite> list){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef1 = database.getReference("favorites");
+
+        myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                listUser.add(user);
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Favorite favorite  = dataSnapshot.getValue(Favorite.class);
+                    list.add(favorite);
+                }
             }
 
             @Override
@@ -104,14 +118,12 @@ public class DetailMovieActivity extends AppCompatActivity {
             }
         });
 
-        Bundle bundle = getIntent().getExtras();
-        int i = 0;
-        CardMovie cardMovie = getCardMovie(bundle, i);
-        for( User user : listUser){
-            addFavorite( user ,cardMovie, list);
-        }
+
+
+        return list;
     }
-    private void addFavorite(User user, CardMovie cardMovie,  List<Favorite> c) {
+
+    private void addFavorite(String user, CardMovie cardMovie,  List<Favorite> c) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("favorites");
         c.add(new Favorite(user, cardMovie));
@@ -123,6 +135,24 @@ public class DetailMovieActivity extends AppCompatActivity {
         btnLuuYeuThich.setVisibility(View.VISIBLE);
         btnBoyeuthic.setVisibility(View.GONE);
         Toast.makeText(DetailMovieActivity.this, "Bỏ lưu thành công", Toast.LENGTH_SHORT).show();
+    }
+    private void getFavoriteFromDatabase(List<Favorite> list){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("favorites");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Favorite favorite  = dataSnapshot.getValue(Favorite.class);
+                    list.add(favorite);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     private CardMovie  getCardMovie(Bundle bundle, int  i){
 //        Bundle bundle = getIntent().getExtras();
@@ -143,11 +173,12 @@ public class DetailMovieActivity extends AppCompatActivity {
         ArrayList<String> user =  bundle.getStringArrayList("arr");
         Toast.makeText(DetailMovieActivity.this, user.size(), Toast.LENGTH_SHORT).show();
     }
-    private void handleBtnPlay(String url, String descM){
+    private void handleBtnPlay(String url, String descM, String title){
         Intent i = new Intent(this, VideoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("video", url );
         bundle.putString("desc", descM);
+        bundle.putString("title", title);
         i.putExtras(bundle);
         startActivity(i);
     }

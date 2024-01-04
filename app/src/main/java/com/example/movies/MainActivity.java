@@ -4,6 +4,7 @@ package com.example.movies;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,24 +41,34 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity{
     RecyclerView ryc;
     CardAdapter cardAdapter;
-    Button homeNavi, userNavi, favoNavi;
+    Button homeNavi, userNavi, favoNavi, btnsearch;
     LinearLayout menu;
-    androidx.appcompat.widget.SearchView search;
-
+    TextView kq;
 
     @Override
     public void onBackPressed() {
+        // Hiển thị hộp thoại xác nhận thoát ứng dụng
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bạn có muốn thoát ứng dụng?");
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish(); // Kết thúc ứng dụng
+            }
+        });
+        builder.setNegativeButton("Không", null);
+        builder.show();
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        List<CardMovie> list = new ArrayList<>();
         Bundle bundle = getIntent().getExtras();
+
         init();
-
-        displayListMovie();
-
+        displayListMovie(list);
 
         //handle click====================
         userNavi.setOnClickListener(new View.OnClickListener() {
@@ -71,24 +83,26 @@ public class MainActivity extends AppCompatActivity{
                 handleChangeFavoriteActivity();
             }
         });
+        btnsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     //method handle=======================
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        search = (androidx.appcompat.widget.SearchView) menu.findItem(R.id.searchmenu).getActionView();
-
-        return true;
-    }
     private void init(){
         ryc = findViewById(R.id.rcy_Movie);
         homeNavi = findViewById(R.id.homenavi);
         userNavi = findViewById(R.id.usernavi);
         menu = findViewById(R.id.menu);
         favoNavi = findViewById(R.id.favoritenavi);
-//        search = findViewById(R.id.search);
+        btnsearch = findViewById(R.id.btnsearch);
+
+        ryc.setLayoutManager(null);
         menu.bringToFront();
     }
     private void handleChangeUserActivity(Bundle bundle){
@@ -100,6 +114,7 @@ public class MainActivity extends AppCompatActivity{
         int index = bundle.getInt("index");
 
         Intent i = new Intent(MainActivity.this, UserActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         bundle.putSerializable("data_user", (Serializable) user);
         bundle.putInt("index", index);
         i.putExtras(bundle);
@@ -112,9 +127,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void transmitDataToDetail(Bundle bundle){
-        if(bundle == null){
-            return;
-        }
         //get user tu login
         User user = (User) bundle.get("obj_user");
         Intent intent = new Intent(MainActivity.this, DetailMovieActivity.class);
@@ -122,8 +134,7 @@ public class MainActivity extends AppCompatActivity{
         intent.putExtras(bundle);
         startActivity(intent);
     }
-    private List<CardMovie> getMovie(){
-        List<CardMovie> list = new ArrayList<>();
+    private List<CardMovie> getMovie(List<CardMovie> list){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("movies");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -146,17 +157,15 @@ public class MainActivity extends AppCompatActivity{
     private void clickNextDetailMovie(CardMovie cardMovie){
         Intent i = new Intent(this, DetailMovieActivity.class);
         Bundle bundle = new Bundle();
-        if(bundle == null){
-            return;
-        }
         //get user tu login
         User user = (User) bundle.get("obj_user");
         int index = bundle.getInt("index");
         bundle.putSerializable("obj_movies", cardMovie );
-        bundle.putInt("index", index);
+        bundle.putInt("userNumber", index);
         i.putExtras(bundle);
         startActivity(i);
     }
+
     private void initdata(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("movies");
@@ -169,7 +178,7 @@ public class MainActivity extends AppCompatActivity{
 
         myRef1.setValue(c);
     }
-    private void displayListMovie(){
+    private void displayListMovie(List<CardMovie> list){
         List<CardMovie> ls = new ArrayList<>();
         cardAdapter = new CardAdapter(this, ls , new IClickEveentCardMovie() {
             @Override
@@ -181,7 +190,8 @@ public class MainActivity extends AppCompatActivity{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         ryc.setLayoutManager(linearLayoutManager);
 
-        cardAdapter.setData(getMovie());
+        cardAdapter.setData(getMovie(list));
         ryc.setAdapter(cardAdapter);
     }
+
 }

@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
+
 public class UserActivity extends AppCompatActivity {
 
     TextView nameavatar, nameuser, emailuser;
@@ -49,6 +51,7 @@ public class UserActivity extends AppCompatActivity {
         if(bundle == null){
             return 0;
         }
+        Intent i = new Intent(this, VideoActivity.class);
         User user = (User) bundle.get("data_user");
         int index = bundle.getInt("index");
         nameuser.setText(user.getUserName());

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginBottom="20sp"
+    android:id="@+id/formComment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nameUserComment"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"/>
+        <TextView
+            android:padding="10sp"
+            android:background="@drawable/border"
+            android:id="@+id/contentComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="cdfjhiepwejeopkcdomcdsvhuiwehioviewhvuoencdj"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/timeComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:45"
+            android:textSize="10sp"
+            android:textColor="@color/gray"
+            android:layout_marginTop="4sp"/>
+
+</LinearLayout>

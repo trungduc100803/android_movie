@@ -2,10 +2,12 @@ package com.example.movies;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,16 +34,22 @@ public class FavoriteActivity extends AppCompatActivity {
         displayListMovie();
     }
 
-    private List<CardMovie> getMovie(){
+
+    private List<CardMovie> getMovieFromFavorite(){
         List<CardMovie> list = new ArrayList<>();
+        Global global = Global.getInstance();
+        String userName = global.getUserName();
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("movies");
+        DatabaseReference myRef = database.getReference("favorites");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    CardMovie cardMovie  = dataSnapshot.getValue(CardMovie.class);
-                    list.add(cardMovie);
+                    Favorite favorite  = dataSnapshot.getValue(Favorite.class);
+                    if(favorite.getUser().equals(userName)){
+                    list.add(favorite.getCardMovie());
+                    }
                 }
                 cardAdapter.notifyDataSetChanged();
             }
@@ -65,7 +73,7 @@ public class FavoriteActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         ryc.setLayoutManager(linearLayoutManager);
 
-        cardAdapter.setData(getMovie());
+        cardAdapter.setData(getMovieFromFavorite());
         ryc.setAdapter(cardAdapter);
     }
     private void clickNextDetailMovie(CardMovie cardMovie){

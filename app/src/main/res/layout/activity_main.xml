@@ -26,15 +26,23 @@
                 android:orientation="vertical"
                 android:padding="20sp">
 
+
                 <LinearLayout
+                    android:backgroundTint="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
-                    <SearchView
-                        android:id="@+id/search"
-                        android:layout_width="match_parent"
+                    <Button
+                        android:backgroundTint="@color/black"
+                        android:layout_gravity="end"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/search"
+                        android:id="@+id/btnsearch"
+                        android:layout_width="70sp"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
+
 
 
                 <ViewFlipper
@@ -81,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20sp"
-                    android:layout_marginBottom="20px"
+                    android:layout_marginBottom="120px"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="20dp" />
 

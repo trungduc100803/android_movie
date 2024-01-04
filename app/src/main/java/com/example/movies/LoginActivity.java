@@ -24,7 +24,7 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView txDangki;
+    TextView txDangki, passAlert, nameAlert;
     EditText username, password;
     Button btnLogin;
 
@@ -65,6 +65,8 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.txtusername);
         password = findViewById(R.id.txtpass);
         btnLogin = findViewById(R.id.btndangnhap);
+        passAlert = findViewById(R.id.textAlert);
+        nameAlert = findViewById(R.id.textAlert);
     }
     private void changeToSignup(){
         Intent i = new Intent(LoginActivity.this, SignupActivity.class);
@@ -81,12 +83,18 @@ public class LoginActivity extends AppCompatActivity {
             // lay ra ten va mk trong database
             String userName = user.getUserName().trim();
             String Pass = user.getPassword().trim();
+
+            Global global = Global.getInstance();
+            global.setUserName(userName);
             index++;
 
             if(!currentPass.equals(Pass) || !currentUserName.equals(userName)){
-                Toast.makeText(LoginActivity.this, "Tên tài khoản hoặc mật khẩu không đúng 😢😢😢😢!!!", Toast.LENGTH_SHORT).show();
+                nameAlert.setText("Tên tài khoản hoặc mật khẩu không đúng");
+                passAlert.setText("Tên tài khoản hoặc mật khẩu không đúng");
+//                Toast.makeText(LoginActivity.this, "Tên tài khoản hoặc mật khẩu không đúng 😢😢😢😢!!!", Toast.LENGTH_SHORT).show();
             }else {
                 int userNumber = index - 1;
+
                 DatabaseReference userg = database.getReference("users/" + userNumber+"/status");
                 DatabaseReference dataUser = database.getReference("users/" + userNumber);
                 userg.setValue(true);
@@ -96,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                         User user = snapshot.getValue(User.class);
 
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("obj_user", (Serializable) user);
                         bundle.putInt("index", userNumber);

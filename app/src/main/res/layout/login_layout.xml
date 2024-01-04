@@ -36,6 +36,11 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 />
+            <TextView
+                android:id="@+id/tenAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"/>
         </LinearLayout>
 
         <LinearLayout
@@ -51,11 +56,17 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
             <EditText
+                android:inputType="textPassword"
                 android:id="@+id/txtpass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 />
+            <TextView
+                android:id="@+id/textAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"/>
         </LinearLayout>
 
         <Button
